@@ -1,0 +1,142 @@
+/* ===== SIMPLE STYLE FOR KHABAR GHOR ===== */
+
+/* 1. Whole page: remove default spacing, set font and background */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;   /* padding stays inside the box width */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #222222;
+}
+
+/* 2. Headings and text */
+h1 { font-size: 28px; margin-bottom: 5px; }
+h2 { font-size: 20px; margin: 20px 0 10px; }
+.sub { color: gray; margin-bottom: 20px; }
+
+/* 3. Page layout: menu on the left, content on the right */
+.layout {
+  display: flex;            /* puts children side by side */
+}
+
+.sidebar {
+  width: 220px;
+  min-height: 100vh;        /* full height of the screen */
+  background-color: #222222;
+  padding: 20px;
+}
+
+.brand { color: white; font-size: 22px; }
+.role  { color: orange; margin-bottom: 20px; }
+
+.sidebar a {
+  display: block;           /* one link per line */
+  color: white;
+  text-decoration: none;    /* removes the underline */
+  padding: 10px;
+}
+
+.sidebar a:hover  { background-color: #444444; }  /* when mouse is over */
+.sidebar a.active { background-color: green; }    /* the page you are on */
+
+.content {
+  flex: 1;                  /* takes all remaining space */
+  padding: 30px;
+}
+
+/* 4. Cards: white boxes */
+.grid {
+  display: flex;
+  flex-wrap: wrap;          /* move to next line when full */
+  gap: 15px;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #cccccc;
+  padding: 15px;
+  width: 220px;
+}
+
+.card.link { display: block; text-decoration: none; color: inherit; }
+.big { font-size: 30px; color: green; }
+
+/* 5. Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;  /* joins the borders together */
+  background-color: white;
+}
+
+th, td {
+  border: 1px solid #cccccc;
+  padding: 10px;
+  text-align: left;
+}
+
+th { background-color: #e6e6e6; }
+
+/* 6. Status labels */
+.badge { padding: 3px 10px; border-radius: 10px; }
+.ok   { background-color: lightgreen; }
+.warn { background-color: gold; }
+.bad  { background-color: salmon; }
+.info { background-color: lightblue; }
+
+/* 7. Bars (charts and timers) */
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.row div:first-child { width: 150px; }   /* the label */
+.row .bar { flex: 1; }                   /* the bar uses the space left */
+
+.bar { background-color: #dddddd; height: 14px; }
+.bar span { display: block; height: 100%; background-color: green; }
+.bar.gold span { background-color: orange; }
+
+/* 8. Order steps (customer track order page) */
+.steps { list-style: none; display: flex; gap: 10px; }
+.steps li { border: 2px solid #cccccc; background-color: white; padding: 10px; flex: 1; text-align: center; }
+.steps li.done    { border-color: green; }
+.steps li.current { border-color: orange; font-weight: bold; }
+
+/* 9. Login and sign up forms */
+.auth {
+  display: flex;
+  justify-content: center;  /* centre left to right */
+  align-items: center;      /* centre top to bottom */
+  min-height: 100vh;
+}
+
+.auth form {
+  background-color: white;
+  border: 1px solid #cccccc;
+  padding: 30px;
+  width: 350px;
+}
+
+.auth label { display: block; margin-top: 15px; font-weight: bold; }
+.auth input, .auth select { width: 100%; padding: 8px; }
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover { background-color: darkgreen; }
+.note { margin-top: 15px; font-size: 14px; }
+
+/* 10. Home page */
+.home { max-width: 900px; margin: 0 auto; padding: 40px 20px; }

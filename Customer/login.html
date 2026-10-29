@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodHub | Customer Portal</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+    color: #222;
+}
+
+header {
+    background: #e74c3c;
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+header h1 {
+    font-size: 27px;
+}
+
+nav {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    text-align: center;
+    padding: 45px 15px;
+    background: #fff0eb;
+}
+
+.hero h2 {
+    font-size: 32px;
+    color: #c0392b;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    margin-bottom: 20px;
+}
+
+input, select, textarea, button {
+    padding: 11px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+button {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #c0392b;
+}
+
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+section {
+    margin-bottom: 40px;
+    scroll-margin-top: 20px;
+}
+
+h2.section-title {
+    margin-bottom: 18px;
+    color: #333;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.controls input {
+    flex: 1;
+    min-width: 180px;
+}
+
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+}
+
+.food-card, .panel {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px #0000000d;
+}
+
+.food-icon {
+    font-size: 55px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.food-card h3 {
+    margin-bottom: 10px;
+}
+
+.food-card p {
+    margin: 8px 0;
+}
+
+.price {
+    color: #e74c3c;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.food-card button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.panel {
+    margin-bottom: 18px;
+}
+
+.panel input, .panel select, .panel textarea {
+    width: 100%;
+    margin: 8px 0;
+}
+
+.panel button {
+    margin: 5px 5px 5px 0;
+}
+
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+}
+
+.small-btn {
+    padding: 7px 11px;
+}
+
+.status {
+    background: #fff0eb;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 6px;
+}
+
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+@media(max-width: 600px) {
+    header {
+        padding: 18px;
+    }
+
+    .hero h2 {
+        font-size: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🍔 FoodHub</h1>
+    <nav>
+        <a href="#menu">Food Menu</a>
+        <a href="#cart">My Cart</a>
+        <a href="#orders">Track Order</a>
+        <a href="#reviews">Reviews</a>
+    </nav>
+</header>
+
+<div class="hero">
+    <h2>Delicious Food, Delivered!</h2>
+    <p>Discover your favourite food and order it easily.</p>
+    <button onclick="location.href='#menu'">Explore Menu</button>
+</div>
+
+<main>
+
+<!-- FEATURE 1: FOOD SEARCH AND FILTER -->
+<section id="menu">
+    <h2 class="section-title">1. Food Menu & Search</h2>
+
+    <div class="controls">
+        <input id="search" type="text"
+               placeholder="Search food..."
+               oninput="renderMenu()">
+
+        <select id="category" onchange="renderMenu()">
+            <option value="All">All Categories</option>
+            <option value="Burger">Burger</option>
+            <option value="Pizza">Pizza</option>
+            <option value="Drinks">Drinks</option>
+            <option value="Dessert">Dessert</option>
+        </select>
+
+        <select id="sort" onchange="renderMenu()">
+            <option value="default">Default Order</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+        </select>
+    </div>
+
+    <div id="food-list" class="food-grid"></div>
+</section>
+
+<!-- FEATURE 2: CART AND CHECKOUT -->
+<section id="cart">
+    <h2 class="section-title">2. Shopping Cart & Checkout</h2>
+
+    <div class="panel">
+        <div id="cart-list"></div>
+        <h3 id="total">Total: ৳0</h3>
+
+        <input id="customer-name" placeholder="Your full name">
+        <input id="customer-phone" type="tel"
+               placeholder="Phone number">
+
+        <textarea id="customer-address"
+                  placeholder="Delivery address"></textarea>
+
+        <button onclick="checkout()">Place Order</button>
+        <p id="checkout-message"></p>
+    </div>
+</section>
+
+<!-- FEATURE 3: ORDER TRACKING -->
+<section id="orders">
+    <h2 class="section-title">3. Order Tracking</h2>
+
+    <div class="panel">
+        <p>Enter your Order ID to check the order status.</p>
+        <input id="track-id" placeholder="e.g. FH-123456">
+        <button onclick="trackOrder()">Track Order</button>
+        <div id="tracking-result"></div>
+        <h3 style="margin-top:20px">My Previous Orders</h3>
+        <div id="order-history"></div>
+    </div>
+</section>
+
+<!-- FEATURE 4: RATING AND REVIEW -->
+<section id="reviews">
+    <h2 class="section-title">4. Food Rating & Review</h2>
+
+    <div class="panel">
+        <p>Share your feedback about our food.</p>
+
+        <select id="review-food"></select>
+
+        <select id="rating">
+            <option value="5">★★★★★ - Excellent</option>
+            <option value="4">★★★★ - Very Good</option>
+            <option value="3">★★★ - Good</option>
+            <option value="2">★★ - Fair</option>
+            <option value="1">★ - Poor</option>
+        </select>
+
+        <textarea id="review-text"
+                  placeholder="Write your review..."></textarea>
+
+        <button onclick="addReview()">Submit Review</button>
+        <div id="review-list"></div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <p>© 2026 FoodHub | Customer Management System</p>
+</footer>
+
+<script>
+// FOOD DATA
+const foods = [
+    {id: 1, name: "Chicken Burger", category: "Burger",
+     price: 180, icon: "🍔"},
+    {id: 2, name: "Beef Burger", category: "Burger",
+     price: 250, icon: "🍔"},
+    {id: 3, name: "Cheese Pizza", category: "Pizza",
+     price: 450, icon: "🍕"},
+    {id: 4, name: "Chicken Pizza", category: "Pizza",
+     price: 500, icon: "🍕"},
+    {id: 5, name: "Cold Coffee", category: "Drinks",
+     price: 120, icon: "🥤"},
+    {id: 6, name: "Chocolate Cake", category: "Dessert",
+     price: 150, icon: "🍰"}
+];
+
+// LOAD DATA FROM BROWSER STORAGE
+function loadData(key, fallback) {
+    try {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : fallback;
+    } catch (error) {
+        return fallback;
+    }
+}
+
+let cart = loadData("fh_cart", []);
+let orders = loadData("fh_orders", []);
+let reviews = loadData("fh_reviews", []);
+
+function saveData() {
+    localStorage.setItem("fh_cart", JSON.stringify(cart));
+    localStorage.setItem("fh_orders", JSON.stringify(orders));
+    localStorage.setItem("fh_reviews", JSON.stringify(reviews));
+}
+
+// FEATURE 1: SEARCH, FILTER AND SORT
+function renderMenu() {
+    const query = document.getElementById("search")
+        .value.toLowerCase();
+
+    const category = document.getElementById("category").value;
+    const sort = document.getElementById("sort").value;
+
+    let result = foods.filter(food =>
+        food.name.toLowerCase().includes(query) &&
+        (category === "All" || food.category === category)
+    );
+
+    if (sort === "low") result.sort((a, b) => a.price - b.price);
+    if (sort === "high") result.sort((a, b) => b.price - a.price);
+
+    const container = document.getElementById("food-list");
+
+    if (result.length === 0) {
+        container.innerHTML = "<p>No food found.</p>";
+        return;
+    }
+
+    container.innerHTML = result.map(food => `
+        <div class="food-card">
+            <div class="food-icon">${food.icon}</div>
+            <h3>${food.name}</h3>
+            <p>Category: ${food.category}</p>
+            <p class="price">৳${food.price}</p>
+            <button onclick="addToCart(${food.id})">
+                Add to Cart
+            </button>
+        </div>
+    `).join("");
+}
+
+// FEATURE 2: CART
+function addToCart(id) {
+    const item = cart.find(x => x.id === id);
+
+    if (item) {
+        item.quantity++;
+    } else {
+        cart.push({id: id, quantity: 1});
+    }
+
+    saveData();
+    renderCart();
+}
+
+function changeQuantity(id, amount) {
+    const item = cart.find(x => x.id === id);
+    if (!item) return;
+
+    item.quantity += amount;
+
+    if (item.quantity <= 0) {
+        cart = cart.filter(x => x.id !== id);
+    }
+
+    saveData();
+    renderCart();
+}
+
+function renderCart() {
+    const container = document.getElementById("cart-list");
+
+    if (cart.length === 0) {
+        container.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+        container.innerHTML = cart.map(item => {
+            const food = foods.find(f => f.id === item.id);
+
+            return `
+                <div class="item-row">
+                    <div>
+                        <strong>${food.name}</strong><br>
+                        ৳${food.price} × ${item.quantity}
+                    </div>
+                    <div>
+                        <button class="small-btn"
+                            onclick="changeQuantity(${item.id}, -1)">−</button>
+                        <button class="small-btn"
+                            onclick="changeQuantity(${item.id}, 1)">+</button>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    const total = cart.reduce((sum, item) => {
+        const food = foods.find(f => f.id === item.id);
+        return sum + food.price * item.quantity;
+    }, 0);
+
+    document.getElementById("total").textContent =
+        "Total: ৳" + total;
+}
+
+function checkout() {
+    const name = document.getElementById("customer-name")
+        .value.trim();
+
+    const phone = document.getElementById("customer-phone")
+        .value.trim();
+
+    const address = document.getElementById("customer-address")
+        .value.trim();
+
+    if (!name || !phone || !address) {
+        alert("Please enter your name, phone and address.");
+        return;
+    }
+
+    if (!/^[0-9+\-\s()]{7,20}$/.test(phone)) {
+        alert("Please enter a valid phone number.");
+        return;
+    }
+
+    if (cart.length === 0) {
+        alert("Please add food to your cart first.");
+        return;
+    }
+
+    const items = cart.map(item => {
+        const food = foods.find(f => f.id === item.id);
+
+        return {
+            name: food.name,
+            price: food.price,
+            quantity: item.quantity
+        };
+    });
+
+    const total = items.reduce((sum, item) =>
+        sum + item.price * item.quantity, 0);
+
+    const orderId = "FH-" +
+        Date.now().toString().slice(-8);
+
+    orders.unshift({
+        id: orderId,
+        name: name,
+        phone: phone,
+        address: address,
+        items: items,
+        total: total,
+        status: "Pending",
+        date: new Date().toLocaleString()
+    });
+
+    cart = [];
+    saveData();
+    renderCart();
+    renderOrders();
+
+    document.getElementById("checkout-message").textContent =
+        "Order placed! Your Order ID is " + orderId;
+
+    document.getElementById("track-id").value = orderId;
+
+    trackOrder();
+}
+
+// FEATURE 3: ORDER TRACKING
+function trackOrder() {
+    const id = document.getElementById("track-id")
+        .value.trim().toUpperCase();
+
+    const order = orders.find(o => o.id === id);
+    const result = document.getElementById("tracking-result");
+
+    if (!order) {
+        result.innerHTML =
+            "<p class='status'>Order not found. Check your Order ID.</p>";
+        return;
+    }
+
+    result.innerHTML = `
+        <div class="status">
+            <h3>Order: ${order.id}</h3>
+            <p>Status: <strong>${order.status}</strong></p>
+            <p>Total: ৳${order.total}</p>
+            <p>Placed: ${order.date}</p>
+            <p>Items: ${order.items.map(item =>
+                item.name + " × " + item.quantity
+            ).join(", ")}</p>
+        </div>
+    `;
+}
+
+function renderOrders() {
+    const container = document.getElementById("order-history");
+
+    if (orders.length === 0) {
+        container.innerHTML = "<p>No orders yet.</p>";
+        return;
+    }
+
+    container.innerHTML = orders.map(order => `
+        <div class="item-row">
+            <div>
+                <strong>${order.id}</strong><br>
+                ৳${order.total} | ${order.status}
+            </div>
+            <button class="small-btn"
+                onclick="openOrder('${order.id}')">
+                View
+            </button>
+        </div>
+    `).join("");
+}
+
+function openOrder(id) {
+    document.getElementById("track-id").value = id;
+    trackOrder();
+}
+
+// FEATURE 4: RATING AND REVIEW
+function renderReviewOptions() {
+    document.getElementById("review-food").innerHTML =
+        foods.map(food =>
+            `<option value="${food.id}">${food.name}</option>`
+        ).join("");
+}
+
+function addReview() {
+    const foodId = Number(
+        document.getElementById("review-food").value
+    );
+
+    const rating = Number(
+        document.getElementById("rating").value
+    );
+
+    const comment = document.getElementById("review-text")
+        .value.trim();
+
+    if (!comment) {
+        alert("Please write a review first.");
+        return;
+    }
+
+    const food = foods.find(f => f.id === foodId);
+
+    reviews.unshift({
+        food: food.name,
+        rating: rating,
+        comment: comment,
+        date: new Date().toLocaleDateString()
+    });
+
+    saveData();
+
+    document.getElementById("review-text").value = "";
+    renderReviews();
+}
+
+function renderReviews() {
+    const container = document.getElementById("review-list");
+
+    if (reviews.length === 0) {
+        container.innerHTML = "<p>No reviews yet.</p>";
+        return;
+    }
+
+    container.innerHTML = reviews.map(review => `
+        <div class="status">
+            <strong>${review.food}</strong>
+            <p>${"★".repeat(review.rating)}${"☆".repeat(5-review.rating)}</p>
+            <p></p>
+            <p>${escapeHTML(review.comment)}</p>
+            <small>${review.date}</small>
+        </div>
+    `).join("");
+}
+
+function escapeHTML(text) {
+    return text.replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+// START WEBSITE
+renderMenu();
+renderCart();
+renderOrders();
+renderReviewOptions();
+renderReviews();
+
+</script>
+
+</body>
+</html>
