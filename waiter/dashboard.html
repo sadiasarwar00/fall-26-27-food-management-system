@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waiter Dashboard</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:20px;
+    background:#eef4f2;
+    color:#1c2b2d;
+    padding-bottom:100px;
+  }
+  header{
+    background:linear-gradient(160deg,#0f6b5c 0%,#14897a 70%,#f2a93b 160%);
+    color:#fff;
+    padding:32px 22px 70px;
+    border-radius:0 0 28px 28px;
+  }
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+  header h1{font-size:1.8rem}
+  header p{opacity:.9;font-size:1rem;margin-top:4px}
+  .logout{
+    border:2px solid rgba(255,255,255,.7);border-radius:12px;
+    padding:10px 16px;color:#fff;text-decoration:none;
+    font-size:.95rem;font-weight:600;white-space:nowrap;
+  }
+  main{max-width:760px;margin:-46px auto 0;padding:0 18px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .stat{
+    background:#fff;border-radius:18px;padding:20px 10px;text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+    text-decoration:none;color:inherit;
+    border-top:6px solid #0f6b5c;
+  }
+  .stat.amber{border-top-color:#f2a93b}
+  .stat.red{border-top-color:#d9482b}
+  .stat b{display:block;font-size:2.4rem;line-height:1.1}
+  .stat span{font-size:.9rem;color:#5f6f72}
+  h2{font-size:1.3rem;margin:30px 0 12px;color:#0f6b5c}
+  .card{
+    background:#fff;border-radius:18px;padding:20px;margin-bottom:14px;
+    box-shadow:0 4px 14px rgba(0,0,0,.07);
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+  }
+  .card b{font-size:1.15rem}
+  .card .small{font-size:.95rem;color:#5f6f72;margin-top:2px}
+  .btn{
+    display:inline-block;border:0;border-radius:12px;
+    padding:14px 22px;background:#0f6b5c;color:#fff;
+    font:inherit;font-size:1rem;font-weight:700;text-decoration:none;
+    box-shadow:0 4px 0 #0a4f44;white-space:nowrap;
+  }
+  .btn:active{transform:translateY(3px);box-shadow:0 1px 0 #0a4f44}
+  .btn.hot{background:#d9482b;box-shadow:0 4px 0 #a8341d}
+  .tag{
+    display:inline-block;font-size:.8rem;font-weight:600;color:#fff;
+    padding:3px 10px;border-radius:99px;margin-bottom:6px;
+  }
+  .tag.new{background:#d9482b}
+  .tag.ready{background:#2e7d4f}
+  nav{
+    position:fixed;bottom:0;left:0;right:0;background:#fff;
+    display:flex;box-shadow:0 -4px 16px rgba(0,0,0,.1);
+  }
+  nav a{
+    flex:1;text-align:center;padding:14px 4px 16px;
+    font-size:.9rem;color:#5f6f72;text-decoration:none;
+  }
+  nav a span{display:block;font-size:1.5rem}
+  nav a.on{color:#0f6b5c;font-weight:700;border-top:4px solid #f2a93b;padding-top:10px}
+  a:focus-visible{outline:3px solid #f2a93b;outline-offset:3px}
+  @media(max-width:480px){.card{flex-direction:column;align-items:flex-start}.btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+  <header>
+    <div class="top">
+      <div>
+        <h1>Hello, <span id="name">Waiter</span> 👋</h1>
+        <p id="today">Here is what needs you now.</p>
+      </div>
+      <a class="logout" href="login.html">Log out</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="stats">
+      <a class="stat red" href="customer-requests.html"><b>3</b><span>New requests</span></a>
+      <a class="stat" href="my-tables.html"><b>4</b><span>My tables</span></a>
+      <a class="stat amber" href="ready-to-serve.html"><b>2</b><span>Ready to serve</span></a>
+    </div>
+
+    <h2>Needs attention</h2>
+
+    <div class="card">
+      <div>
+        <span class="tag new">New request</span>
+        <div><b>Table 5</b></div>
+        <div class="small">Customer asked for the bill</div>
+      </div>
+      <a class="btn hot" href="customer-requests.html">Open</a>
+    </div>
+
+    <div class="card">
+      <div>
+        <span class="tag ready">Ready</span>
+        <div><b>Table 2 · Grilled chicken</b></div>
+        <div class="small">Waiting at the kitchen pass</div>
+      </div>
+      <a class="btn" href="ready-to-serve.html">Serve</a>
+    </div>
+  </main>
+
+  <nav>
+    <a href="dashboard.html" class="on"><span>🏠</span>Dashboard</a>
+    <a href="customer-requests.html"><span>🔔</span>Requests</a>
+    <a href="my-tables.html"><span>🍽️</span>My tables</a>
+    <a href="ready-to-serve.html"><span>✅</span>Ready</a>
+  </nav>
+
+<script>
+  document.getElementById('name').textContent = sessionStorage.getItem('waiter') || 'Waiter';
+  document.getElementById('today').textContent =
+    new Date().toLocaleDateString(undefined, {weekday:'long', day:'numeric', month:'long'});
+</script>
+</body>
+</html>
