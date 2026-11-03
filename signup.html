@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign up | Khabar Ghor</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="auth">
+  <form action="index.html" method="get">
+    <h1>Create account</h1>
+    <p class="sub">Admin accounts cannot be created here.</p>
+    <label for="name">Full name</label>
+    <input id="name" type="text" name="name" required>
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" required>
+    <label for="phone">Phone</label>
+    <input id="phone" type="tel" name="phone" required>
+    <label for="role">I am a</label>
+    <select id="role" name="role">
+      <option>Customer</option>
+      <option>Waiter</option>
+     <option>Cashier</option>
+    </select>
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" required>
+    <button type="submit">Sign up</button>
+    <p class="note"><a href="index.html">Back to home</a></p>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff Overview | Khabar Ghor</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="brand">Khabar Ghor</div>
+    <div class="role">Admin panel</div>
+    <a href="dashboard.html" class="">Dashboard</a><a href="sales.html" class="">Sales Overview</a><a href="staff.html" class="active">Staff Overview</a><a href="reports.html" class="">Reports</a><a class="logout" href="../index.html">Log out</a>
+  </nav>
+  <main class="content">
+    <h1>Staff Overview</h1>
+    <p class="sub">Who is working today.</p>
+    <div class="table-wrap"><table><thead><tr><th>Name</th><th>Role</th><th>Shift</th><th>Status</th></tr></thead><tbody><tr><td>Karim</td><td>Waiter</td><td>10am to 6pm</td><td><span class="badge ok">On duty</span></td></tr><tr><td>Rina</td><td>Waiter</td><td>2pm to 10pm</td><td><span class="badge info">Not started</span></td></tr><tr><td>Salma</td><td>Chef</td><td>9am to 5pm</td><td><span class="badge ok">On duty</span></td></tr><tr><td>Nadia</td><td>Cashier</td><td>10am to 6pm</td><td><span class="badge ok">On duty</span></td></tr><tr><td>Jamal</td><td>Chef</td><td>3pm to 11pm</td><td><span class="badge info">Not started</span></td></tr><tr><td>Sumon</td><td>Waiter</td><td>10am to 6pm</td><td><span class="badge warn">On leave</span></td></tr></tbody></table></div>
+  </main>
+</div>
+<script src="../js/auth.js"></script>
+<script src="../js/tables.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>
