@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Khabar Ghor - Order Track</title>
+   <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <div class="sidebar">
+     <div class="brand">Khabar Ghor</div>
+     <div class="role">Customer Panel</div>
+
+  <a href="index.html">Home</a>
+ <a href="dashboard.html">Dashboard</a>
+ <a href="food-search.html">Food Search</a>
+ <a href="order-trac.html" class="active">Order Track</a>
+<a href="offers and combos.html">Offers & Combos</a>
+ <a href="reviews.html">Reviews</a>
+ <a href="login.html">Login</a>
+<a href="signup.html">Sign Up</a>
+</div>
+
+ <div class="content">
+
+<h1>Track Your Order</h1>
+<p class="sub">Check your current order status</p>
+
+<form>
+ <label>Enter Order ID</label>
+<input type="text" placeholder="Example: 101">
+
+<button type="button">Track Order</button>
+ </form>
+
+<h2>Order Details</h2>
+
+ <div class="card">
+<h2>Order #101</h2>
+ <p>Food: Chicken Burger</p>
+ <p>Total Price: 250 Tk</p>
+ <p>Delivery Address: Mirpur, Dhaka</p>
+ <p>Status: <span class="badge info">On the way</span></p>
+ </div>
+
+  <h2>Order Progress</h2>
+
+  <ul class="steps">
+ <li class="done">Confirmed</li>
+  <li class="done">Preparing</li>
+  <li class="current">On the way</li>
+  <li>Delivered</li>
+ </ul>
+
+</div>
+</div>
+<script src="../js/auth.js"></script>
+<script src="../js/tables.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

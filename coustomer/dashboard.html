@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Khabar Ghor - Dashboard</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <div class="sidebar">
+        <div class="brand">Khabar Ghor</div>
+        <div class="role">Customer Panel</div>
+
+        <a href="index.html">Home</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="food-search.html">Food Search</a>
+        <a href="order-trac.html">Order Track</a>
+        <a href="offers and combos.html">Offers & Combos</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+    </div>
+
+    <div class="content">
+
+        <h1>Customer Dashboard</h1>
+        <p class="sub">Welcome to Khabar Ghor!</p>
+
+        <div class="grid">
+
+            <div class="card">
+                <h2>Total Orders</h2>
+                <p class="big">12</p>
+            </div>
+
+            <div class="card">
+                <h2>Pending Orders</h2>
+                <p class="big">2</p>
+            </div>
+
+            <div class="card">
+                <h2>Completed Orders</h2>
+                <p class="big">10</p>
+            </div>
+
+            <div class="card">
+                <h2>Available Offers</h2>
+                <p class="big">5</p>
+            </div>
+
+        </div>
+
+        <h2>Recent Orders</h2>
+
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>Food Name</th>
+                <th>Price</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>101</td>
+                <td>Chicken Burger</td>
+                <td>250 Tk</td>
+                <td><span class="badge ok">Delivered</span></td>
+            </tr>
+
+            <tr>
+                <td>102</td>
+                <td>Pizza</td>
+                <td>550 Tk</td>
+                <td><span class="badge warn">Pending</span></td>
+            </tr>
+
+            <tr>
+                <td>103</td>
+                <td>Fried Chicken</td>
+                <td>300 Tk</td>
+                <td><span class="badge info">Processing</span></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<script src="../js/auth.js"></script>
+<script src="../js/tables.js"></script>
+<script src="../js/admin.js"></script>
+
+</body>
+</html>

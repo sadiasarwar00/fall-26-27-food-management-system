@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Khabar Ghor - Food Search</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <div class="sidebar">
+        <div class="brand">Khabar Ghor</div>
+        <div class="role">Customer Panel</div>
+
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="food-search.html" class="active">Food Search</a>
+        <a href="order-trac.html">Order Track</a>
+        <a href="offers and combos.html">Offers & Combos</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+    </div>
+
+    <div class="content">
+
+        <h1>Food Search</h1>
+        <p class="sub">Find your favourite food</p>
+
+        <form>
+            <input type="text" placeholder="Search food name...">
+
+            <select>
+                <option>All Categories</option>
+                <option>Burger</option>
+                <option>Pizza</option>
+                <option>Chicken</option>
+                <option>Drinks</option>
+            </select>
+
+            <button type="submit">Search Food</button>
+        </form>
+
+        <h2>Available Foods</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <h2>Chicken Burger</h2>
+                <p>Price: 250 Tk</p>
+                <p>Category: Burger</p>
+                <span class="badge ok">Available</span>
+                <br>
+                <button type="button">Order Now</button>
+            </div>
+
+            <div class="card">
+                <h2>Cheese Pizza</h2>
+                <p>Price: 550 Tk</p>
+                <p>Category: Pizza</p>
+                <span class="badge ok">Available</span>
+                <br>
+                <button type="button">Order Now</button>
+            </div>
+<div class="card">
+ <h2>Fried Chicken</h2>
+ <p>Price: 300 Tk</p>
+ <p>Category: Chicken</p>
+<span class="badge ok">Available</span>
+  <br>
+<button type="button">Order Now</button>
+     </div>
+
+            <div class="card">
+                <h2>Cold Coffee</h2>
+                <p>Price: 150 Tk</p>
+                <p>Category: Drinks</p>
+                <span class="badge warn">Limited</span>
+                <br>
+                <button type="button">Order Now</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script src="../js/auth.js"></script>
+<script src="../js/tables.js"></script>
+<script src="../js/admin.js"></script>
+
+</body>
+</html>
