@@ -56,24 +56,28 @@
 
 <h2>Write a Review</h2>
 
-<form>
- <label>Your Name</label>
-    <input type="text" placeholder="Enter your name">
 
-    <label>Select Rating</label>
-    <select>
-    <option>5 - Excellent</option>
-     <option>4 - Very Good</option>
-    <option>3 - Good</option>
-     <option>2 - Average</option>
-     <option>1 - Poor</option>
-</select>
+<form id="reviewForm">
 
- <label>Your Review</label>
-<textarea rows="4" placeholder="Write your feedback..."></textarea>
+    <label>Your Name</label>
+    <input type="text" id="reviewName" placeholder="Enter your name">
 
- <button type="submit">Submit Review</button>
- </form>
+    <label>Rating</label>
+    <select id="rating">
+        <option value="5">5 Stars</option>
+        <option value="4">4 Stars</option>
+        <option value="3">3 Stars</option>
+        <option value="2">2 Stars</option>
+        <option value="1">1 Star</option>
+    </select>
+
+    <label>Your Review</label>
+    <textarea id="reviewText" placeholder="Write your review"></textarea>
+
+    <button type="submit">Submit Review</button>
+
+</form>
+
 
  </div>
 </div>
