@@ -1,8 +1,8 @@
 // auth.js - signup validation, login check, and "you must log in" protection
 (function () {
   const read = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
-  const m = location.pathname.match(/\/(admin|customer|waiter|chef|cashier)\//i);
-  const folder = m ? m[1].toLowerCase() : null;          // which user's folder we are in
+ const m = location.pathname.match(/\/(admin|customer|coustomer|waiter|cashier)\//i);
+ const folder = m ? m[1].toLowerCase().replace('coustomer', 'customer') : null;          // which user's folder we are in
   const page = location.pathname.split('/').pop().toLowerCase();
   const session = read('session', null);
 
@@ -39,7 +39,7 @@
       if (!a || !b) return;
       let user = null;
       if (folder === 'admin') {
-        if (mail === 'sadia@khabar.com' && pass.value === 'sadia@123') user = { name: 'Admin', email: mail, role: 'admin' };
+        if (mail === 'admin@khabar.com' && pass.value === 'Admin@123') user = { name: 'Admin', email: mail, role: 'admin' };
       } else {
         const u = read('users', []).find(x => x.email === mail && x.password === pass.value && x.role === folder);
         if (u) user = { name: u.name, email: u.email, role: u.role };

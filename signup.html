@@ -8,26 +8,27 @@
 </head>
 <body>
 <div class="auth">
-  <form action="index.html" method="get">
+  <form novalidate>
     <h1>Create account</h1>
     <p class="sub">Admin accounts cannot be created here.</p>
     <label for="name">Full name</label>
-    <input id="name" type="text" name="name" required>
+    <input id="name" type="text" name="name">
     <label for="email">Email</label>
-    <input id="email" type="email" name="email" required>
+    <input id="email" type="email" name="email">
     <label for="phone">Phone</label>
-    <input id="phone" type="tel" name="phone" required>
+    <input id="phone" type="tel" name="phone" placeholder="01XXXXXXXXX">
     <label for="role">I am a</label>
     <select id="role" name="role">
       <option>Customer</option>
       <option>Waiter</option>
-     <option>Cashier</option>
+      <option>Cashier</option>
     </select>
     <label for="password">Password</label>
-    <input id="password" type="password" name="password" required>
+    <input id="password" type="password" name="password">
     <button type="submit">Sign up</button>
     <p class="note"><a href="index.html">Back to home</a></p>
   </form>
 </div>
+<script src="js/auth.js"></script>
 </body>
 </html>
