@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bills to Collect | Khabar Ghor</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="brand">Khabar Ghor</div>
+    <div class="role">Cashier Panel</div>
+
+    <a href="dashboard.html">Dashboard</a>
+    <a href="bills.html" class="active">Bills to Collect</a>
+    <a href="verification.html">Payment Verification</a>
+    <a href="reconciliation.html">Cash Reconciliation</a>
+    <a class="logout" href="../index.html">Log out</a>
+  </nav>
+
+  <main class="content">
+
+    <h1>Bills to Collect</h1>
+    <p class="sub">Customer bills and their payment information.</p>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Total Bills</h3>
+        <div class="big" id="billCount">0</div>
+      </div>
+
+      <div class="card">
+        <h3>Pending Amount</h3>
+        <div class="big" id="pendingAmount">৳0</div>
+      </div>
+
+    </div>
+
+    <h2>Customer Bill List</h2>
+
+    <input
+      type="text"
+      id="billSearch"
+      placeholder="Search by bill ID, customer or method"
+    >
+
+    <table class="table" id="billTable">
+      <thead>
+        <tr>
+          <th>Bill ID</th>
+          <th>Customer</th>
+          <th>Amount</th>
+          <th>Payment Method</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody id="billTableBody"></tbody>
+    </table>
+
+  </main>
+</div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/cashier.js"></script>
+
+</body>
+</html>

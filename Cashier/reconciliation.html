@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cash Reconciliation | Khabar Ghor</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="brand">Khabar Ghor</div>
+    <div class="role">Cashier Panel</div>
+
+    <a href="dashboard.html">Dashboard</a>
+    <a href="bills.html">Bills to Collect</a>
+    <a href="verification.html">Payment Verification</a>
+    <a href="reconciliation.html" class="active">Cash Reconciliation</a>
+    <a class="logout" href="../index.html">Log out</a>
+  </nav>
+
+  <main class="content">
+
+    <h1>Cash Reconciliation</h1>
+    <p class="sub">Compare expected cash with actual cash received.</p>
+
+    <div class="card">
+
+      <h3>Cash Calculation</h3>
+
+      <label for="expectedCash">Expected Cash (৳)</label>
+      <input type="number" id="expectedCash" placeholder="Enter expected cash" min="0" step="0.01">
+
+      <label for="actualCash">Actual Cash (৳)</label>
+      <input type="number" id="actualCash" placeholder="Enter actual cash" min="0" step="0.01">
+
+      <button type="button" id="calculateCash">Calculate</button>
+
+      <h3>Reconciliation Result</h3>
+
+      <p id="differenceResult">Difference: ৳0.00</p>
+      <p id="cashStatus">Status: Not calculated</p>
+
+    </div>
+
+    <div class="card">
+      <h3>Last Reconciliation</h3>
+      <p id="lastReconciliation">No reconciliation record yet.</p>
+    </div>
+
+  </main>
+</div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/cashier.js"></script>
+
+</body>
+</html>

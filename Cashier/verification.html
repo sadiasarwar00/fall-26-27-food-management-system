@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payment Verification | Khabar Ghor</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="brand">Khabar Ghor</div>
+    <div class="role">Cashier Panel</div>
+
+    <a href="dashboard.html">Dashboard</a>
+    <a href="bills.html">Bills to Collect</a>
+    <a href="verification.html" class="active">Payment Verification</a>
+    <a href="reconciliation.html">Cash Reconciliation</a>
+    <a class="logout" href="../index.html">Log out</a>
+  </nav>
+
+  <main class="content">
+
+    <h1>Payment Verification</h1>
+    <p class="sub">Check customer payment information.</p>
+
+    <div class="card">
+
+      <h3>Verify Customer Payment</h3>
+
+      <label for="verifyBillId">Bill ID</label>
+      <input type="text" id="verifyBillId" placeholder="Example: B002">
+
+      <label for="paymentMethod">Payment Method</label>
+      <select id="paymentMethod">
+        <option value="">Select Payment Method</option>
+        <option value="bKash">bKash</option>
+        <option value="Nagad">Nagad</option>
+        <option value="Rocket">Rocket</option>
+        <option value="Cash">Cash</option>
+        <option value="Card">Card</option>
+      </select>
+
+      <label for="transactionId">Transaction ID</label>
+      <input type="text" id="transactionId" placeholder="Enter transaction ID">
+
+      <label for="verifyAmount">Payment Amount (৳)</label>
+      <input type="number" id="verifyAmount" placeholder="Enter amount" min="0">
+
+      <button type="button" id="verifyBtn">Verify Payment</button>
+
+      <p id="verifyResult" class="note"></p>
+
+    </div>
+
+  </main>
+</div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/cashier.js"></script>
+
+</body>
+</html>

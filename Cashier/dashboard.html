@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcome, Cashier | Khabar Ghor</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="brand">Khabar Ghor</div>
+    <div class="role">Cashier Panel</div>
+
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="bills.html">Bills to Collect</a>
+    <a href="verification.html">Payment Verification</a>
+    <a href="reconciliation.html">Cash Reconciliation</a>
+    <a class="logout" href="../index.html">Log out</a>
+  </nav>
+
+  <main class="content">
+
+    <h1>Welcome, Cashier</h1>
+    <p class="sub">Manage customer bills and payment activities.</p>
+
+    <div class="grid">
+
+      <a class="card link" href="bills.html">
+        <h3>Total Bills</h3>
+        <div class="big" id="totalBills">0</div>
+        <p>Customer bills</p>
+      </a>
+
+      <a class="card link" href="bills.html">
+        <h3>Collected Today</h3>
+        <div class="big" id="collectedToday">৳0</div>
+        <p>Total payments received today</p>
+      </a>
+
+      <a class="card link" href="verification.html">
+        <h3>Pending Payments</h3>
+        <div class="big" id="pendingPayments">0</div>
+        <p>Payments waiting for verification</p>
+      </a>
+
+    </div>
+
+    <h2>Cashier Features</h2>
+
+    <div class="grid">
+
+      <a class="card link" href="bills.html">
+        <h3>Bills to Collect</h3>
+        <p>View customer bills and collect payments.</p>
+      </a>
+
+      <a class="card link" href="verification.html">
+        <h3>Payment Verification</h3>
+        <p>Verify bKash, Nagad, Rocket and other payments.</p>
+      </a>
+
+      <a class="card link" href="reconciliation.html">
+        <h3>Cash Reconciliation</h3>
+        <p>Compare expected cash with actual cash.</p>
+      </a>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/cashier.js"></script>
+
+</body>
+</html>
