@@ -1,103 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Waiter Login</title>
-
-<style>
-  body{font-family:Arial,sans-serif;font-size:20px;margin:0;padding:20px;min-height:100vh;
-       display:flex;align-items:center;justify-content:center;
-       background:linear-gradient(160deg,#0f6b5c,#14897a,#f2a93b)}
-  .box{background:#fff;width:100%;max-width:450px;padding:32px;border-radius:20px;border-top:8px solid #f2a93b}
-  h1{text-align:center;color:#0f6b5c;margin:0 0 20px}
-  input{width:100%;box-sizing:border-box;height:56px;padding:0 16px;margin:6px 0 16px;
-        font-size:20px;border:2px solid #cfdcd9;border-radius:12px}
-  button{width:100%;height:60px;font-size:22px;font-weight:bold;color:#fff;
-         background:#0f6b5c;border:0;border-radius:12px;cursor:pointer}
-  .link{text-align:center;margin-top:18px;font-size:18px}
-  .link a{color:#0f6b5c;font-weight:bold;cursor:pointer}
-  #msg{color:#d9482b;min-height:24px;margin-bottom:10px}
-  #signup{display:none}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waiter Login</title>
+  <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
-<div class="box">
 
-  <!-- LOG IN -->
-  <div id="login">
-    <h1>Waiter Log in</h1>
-    <label>Staff ID</label>
-    <input id="loginId" placeholder="e.g. W-102">
-    <label>Password</label>
-    <input id="loginPw" type="password" placeholder="Your password">
-    <p id="msg"></p>
-    <button onclick="logIn()">Log in</button>
-    <p class="link">No account? <a onclick="show('signup')">Sign up</a></p>
-  </div>
+<div class="auth">
+  <form novalidate>
+    <h1>🍽️ Khabar Ghor</h1>
+    <p class="sub"><span class="badge ok">Waiter</span> Log in to see your tables</p>
 
-  <!-- SIGN UP -->
-  <div id="signup">
-    <h1>Create account</h1>
-    <label>Full name</label>
-    <input id="newName" placeholder="Your name">
-    <label>Staff ID</label>
-    <input id="newId" placeholder="Choose a staff ID">
-    <label>Password</label>
-    <input id="newPw" type="password" placeholder="At least 6 characters">
-    <p id="msg2"></p>
-    <button onclick="signUp()">Sign up</button>
-    <p class="link">Have an account? <a onclick="show('login')">Log in</a></p>
-  </div>
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" placeholder="you@example.com">
 
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" placeholder="Your password">
+
+    <button type="submit">Log in</button>
+
+    <p class="note">No account? <a href="../signup.html">Sign up</a></p>
+    <p class="note"><a href="../index.html">Back to home</a></p>
+  </form>
 </div>
 
-<script>
-  // Show login or signup
-  function show(which) {
-    document.getElementById('login').style.display = which == 'login' ? 'block' : 'none';
-    document.getElementById('signup').style.display = which == 'signup' ? 'block' : 'none';
-  }
-
-  // Get saved accounts
-  function getUsers() {
-    return JSON.parse(localStorage.getItem('waiters') || '{}');
-  }
-
-  // Sign up
-  function signUp() {
-    var name = document.getElementById('newName').value.trim();
-    var id = document.getElementById('newId').value.trim();
-    var pw = document.getElementById('newPw').value;
-    var users = getUsers();
-
-    if (!name || !id || pw.length < 6) {
-      document.getElementById('msg2').innerText = 'Fill everything. Password needs 6+ characters.';
-      return;
-    }
-    if (users[id]) {
-      document.getElementById('msg2').innerText = 'This staff ID is already taken.';
-      return;
-    }
-    users[id] = { name: name, password: pw };
-    localStorage.setItem('waiters', JSON.stringify(users));
-    alert('Account created! Now log in.');
-    show('login');
-  }
-
-  // Log in
-  function logIn() {
-    var id = document.getElementById('loginId').value.trim();
-    var pw = document.getElementById('loginPw').value;
-    var user = getUsers()[id];
-
-    if (!user || user.password != pw) {
-      document.getElementById('msg').innerText = 'Wrong staff ID or password.';
-      return;
-    }
-    sessionStorage.setItem('waiter', user.name);
-    location.href = 'dashboard.html';
-  }
-</script>
+<script src="../js/auth.js"></script>
 </body>
 </html>

@@ -1,141 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Customer Requests</title>
-<style>
-  body{font-family:Arial,sans-serif;font-size:20px;margin:0;background:#eef4f2;padding-bottom:90px}
-
-  header{background:linear-gradient(160deg,#0f6b5c,#14897a 70%,#f2a93b 170%);color:#fff;
-         padding:28px 20px 60px;border-radius:0 0 26px 26px;
-         display:flex;justify-content:space-between;align-items:center}
-  header h1{margin:0;font-size:28px}
-  header p{margin:4px 0 0;font-size:16px;opacity:.9}
-  #logout{background:none;border:2px solid #fff;color:#fff;font-size:16px;
-          padding:10px 16px;border-radius:10px;cursor:pointer}
-
-  main{padding:0 20px;max-width:900px;margin:-34px auto 0}
-
-  .tables{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
-  .card{background:#fff;border-radius:20px;padding:20px;
-        box-shadow:0 8px 20px rgba(0,0,0,.08);border-left:8px solid #d9482b}
-  .card.taken{border-left-color:#f2a93b}
-
-  .head{display:flex;align-items:center;gap:14px}
-  .num{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;
-       justify-content:center;font-size:26px;font-weight:bold;color:#fff;background:#d9482b}
-  .taken .num{background:#f2a93b}
-  .head b{font-size:22px;display:block}
-  .head small{color:#5f6f72;font-size:15px}
-
-  .tag{display:inline-block;margin:14px 0 8px;font-size:14px;font-weight:bold;
-       padding:6px 14px;border-radius:99px;background:#fbe5e0;color:#d9482b}
-  .taken .tag{background:#fdf1d9;color:#a8710a}
-
-  p.text{margin:0 0 16px;font-size:18px;padding-top:10px;border-top:1px solid #eef2f1}
-
-  .btn{width:100%;height:56px;border:0;border-radius:14px;background:#0f6b5c;color:#fff;
-       font-size:20px;font-weight:bold;cursor:pointer;box-shadow:0 5px 0 #0a4f44}
-  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 #0a4f44}
-  .taken .btn{background:#2e7d4f;box-shadow:0 5px 0 #1f5a37}
-
-  .empty{display:none;text-align:center;color:#5f6f72;padding:40px 20px;
-         background:#fff;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,.08)}
-  .empty b{display:block;font-size:24px;color:#0f6b5c;margin-bottom:6px}
-
-  nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;
-      box-shadow:0 -4px 16px rgba(0,0,0,.1)}
-  nav a{flex:1;text-align:center;padding:14px 4px 16px;font-size:15px;
-        color:#5f6f72;text-decoration:none}
-  nav a span{display:block;font-size:24px}
-  nav a.on{color:#0f6b5c;font-weight:bold;border-top:4px solid #f2a93b;padding-top:10px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Requests</title>
+  <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
 
-<header>
-  <div>
-    <h1>🔔 Customer requests</h1>
-    <p id="count">3 requests waiting</p>
-  </div>
-  <button id="logout" onclick="logOut()">Log out</button>
-</header>
+<div class="layout">
 
-<main>
-  <div class="tables">
+  <!-- Left menu -->
+  <div class="sidebar">
+    <div class="brand">🍽️ Khabar Ghor</div>
+    <div class="role">Waiter</div>
 
-    <div class="card">
-      <div class="head"><div class="num">5</div><div><b>Table 5</b><small>🕒 2 min ago</small></div></div>
-      <span class="tag">🧾 New request</span>
-      <p class="text">Please bring the bill.</p>
-      <button class="btn" onclick="step(this)">Accept</button>
-    </div>
-
-    <div class="card">
-      <div class="head"><div class="num">3</div><div><b>Table 3</b><small>🕒 4 min ago</small></div></div>
-      <span class="tag">💧 New request</span>
-      <p class="text">Extra water and napkins.</p>
-      <button class="btn" onclick="step(this)">Accept</button>
-    </div>
-
-    <div class="card">
-      <div class="head"><div class="num">8</div><div><b>Table 8</b><small>🕒 5 min ago</small></div></div>
-      <span class="tag">🍔 New request</span>
-      <p class="text">Order change: no onions on the burger.</p>
-      <button class="btn" onclick="step(this)">Accept</button>
-    </div>
-
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="customer-requests.html" class="active">🔔 Customer Requests</a>
+    <a href="my-tables.html">🍽️ My Tables</a>
+    <a href="ready-to-serve.html">✅ Ready to Serve</a>
+    <a href="login.html" class="logout">Log out</a>
   </div>
 
-  <div class="empty" id="empty">
-    <b>🎉 All done!</b>
-    No customer requests right now.
+  <!-- Right content -->
+  <div class="content">
+    <h1>🔔 Customer Requests</h1>
+    <p class="sub" id="count">3 requests waiting</p>
+
+    <div class="grid" id="list">
+
+      <div class="card">
+        <h2>Table 5</h2>
+        <p>🕒 2 min ago</p>
+        <p><span class="badge bad">🧾 New request</span></p>
+        <p>Please bring the bill.</p>
+        <button data-step>Accept</button>
+      </div>
+
+      <div class="card">
+        <h2>Table 3</h2>
+        <p>🕒 4 min ago</p>
+        <p><span class="badge bad">💧 New request</span></p>
+        <p>Extra water and napkins.</p>
+        <button data-step>Accept</button>
+      </div>
+
+      <div class="card">
+        <h2>Table 8</h2>
+        <p>🕒 5 min ago</p>
+        <p><span class="badge bad">🍔 New request</span></p>
+        <p>Order change: no onions on the burger.</p>
+        <button data-step>Accept</button>
+      </div>
+
+    </div>
+
+    <p class="sub" id="empty" hidden>🎉 All done! No customer requests right now.</p>
   </div>
-</main>
 
-<nav>
-  <a href="dashboard.html"><span>🏠</span>Dashboard</a>
-  <a href="customer-requests.html" class="on"><span>🔔</span>Requests</a>
-  <a href="my-tables.html"><span>🍽️</span>My tables</a>
-  <a href="ready-to-serve.html"><span>✅</span>Ready</a>
-</nav>
+</div>
 
-<script>
-  // If not logged in, go back to login page
-  if (!sessionStorage.getItem('waiter')) {
-    location.href = 'login.html';
-  }
-
-  // First click: Accept. Second click: Mark done (removes the card)
-  function step(button) {
-    var card = button.parentElement;
-    if (!card.classList.contains('taken')) {
-      card.classList.add('taken');
-      card.querySelector('.tag').innerText = '⏳ In progress';
-      button.innerText = 'Mark as done';
-    } else {
-      card.remove();
-      updateCount();
-    }
-  }
-
-  // Update the number at the top
-  function updateCount() {
-    var left = document.querySelectorAll('.card').length;
-    if (left == 0) {
-      document.getElementById('count').innerText = 'No requests right now';
-      document.getElementById('empty').style.display = 'block';
-    } else {
-      document.getElementById('count').innerText = left + ' request' + (left > 1 ? 's' : '') + ' waiting';
-    }
-  }
-
-  // Log out
-  function logOut() {
-    sessionStorage.removeItem('waiter');
-    location.href = 'login.html';
-  }
-</script>
+<script src="../js/auth.js"></script>
+<script src="../js/waiter.js"></script>
 </body>
 </html>
