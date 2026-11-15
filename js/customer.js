@@ -1,85 +1,124 @@
 
 /* ===== KHABAR GHOR CUSTOMER JAVASCRIPT ===== */
 
+document.addEventListener("DOMContentLoaded", function () {
 
-/* 1. FOOD SEARCH */
+    /* 1. FOOD SEARCH */
 
-function searchFood() {
-    let input = document.getElementById("searchInput");
-    let filter = input.value.toLowerCase();
+    const searchForm = document.querySelector(".content form");
+    const searchInput = document.querySelector(
+        '.content input[type="text"]'
+    );
+    const categorySelect = document.querySelector(
+        ".content select"
+    );
+    const foodCards = document.querySelectorAll(".grid .card");
 
-    let cards = document.querySelectorAll(".food-card");
+    if (searchForm && searchInput && foodCards.length > 0) {
 
-    cards.forEach(function(card) {
-        let foodName = card.querySelector("h2").innerText.toLowerCase();
+        function searchFood() {
+            const keyword = searchInput.value.toLowerCase().trim();
+            const category = categorySelect
+                ? categorySelect.value.toLowerCase()
+                : "all categories";
 
-        if (foodName.includes(filter)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
+            foodCards.forEach(function (card) {
+                const name = card.querySelector("h2")
+                    ? card.querySelector("h2").innerText.toLowerCase()
+                    : "";
+
+                const details = card.innerText.toLowerCase();
+
+                const nameMatch = name.includes(keyword);
+                const categoryMatch =
+                    category === "all categories" ||
+                    details.includes(category);
+
+                card.style.display =
+                    nameMatch && categoryMatch ? "" : "none";
+            });
         }
-    });
-}
 
+        searchForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            searchFood();
+        });
 
-/* 2. ORDER TRACKING */
-
-function trackOrder() {
-    let orderID = document.getElementById("orderID").value;
-
-    if (orderID == "101") {
-        alert("Order #101: Your order is on the way!");
+        if (categorySelect) {
+            categorySelect.addEventListener("change", searchFood);
+        }
     }
-    else if (orderID == "102") {
-        alert("Order #102: Your order is pending!");
+
+
+    /* 2. FOOD ORDER */
+
+    document.querySelectorAll(".grid .card button").forEach(
+        function (button) {
+            button.addEventListener("click", function () {
+                const card = button.closest(".card");
+                const foodName = card.querySelector("h2").innerText;
+
+                alert(foodName + " added to your order!");
+            });
+        }
+    );
+
+
+    /* 3. ORDER TRACKING */
+
+    const trackButton = document.getElementById("trackButton");
+
+    if (trackButton) {
+        trackButton.addEventListener("click", function () {
+            const orderID = document.getElementById("orderID").value.trim();
+
+            const orders = {
+                "101": "Your order is on the way!",
+                "102": "Your order is pending!",
+                "103": "Your order is processing!"
+            };
+
+            alert(orders[orderID] || "Order not found!");
+        });
     }
-    else if (orderID == "103") {
-        alert("Order #103: Your order is processing!");
+
+
+    /* 4. CUSTOMER REVIEW */
+
+    const reviewForm = document.getElementById("reviewForm");
+
+    if (reviewForm) {
+        reviewForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("reviewName").value.trim();
+            const rating = document.getElementById("rating").value;
+            const review = document.getElementById("reviewText").value.trim();
+
+            if (!name || !review) {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            alert("Thank you " + name + " for your review!");
+
+            console.log("Name:", name);
+            console.log("Rating:", rating);
+            console.log("Review:", review);
+
+            reviewForm.reset();
+        });
     }
-    else {
-        alert("Order not found!");
+
+
+    /* 5. DASHBOARD WELCOME */
+
+    const welcomeButton = document.getElementById("welcomeButton");
+
+    if (welcomeButton) {
+        welcomeButton.addEventListener("click", function () {
+            alert("Welcome to Khabar Ghor Customer Dashboard!");
+        });
     }
-}
 
-
-/* 3. FOOD ORDER */
-
-function orderFood(foodName) {
-    alert(foodName + " added to your order!");
-}
-
-
-/* 4. COMBO ORDER */
-
-function buyCombo(comboName) {
-    alert(comboName + " selected successfully!");
-}
-
-
-/* 5. CUSTOMER REVIEW */
-
-function submitReview() {
-    let name = document.getElementById("reviewName").value;
-    let rating = document.getElementById("rating").value;
-    let review = document.getElementById("reviewText").value;
-
-    if (name == "" || review == "") {
-        alert("Please fill all fields!");
-    }
-    else {
-        alert("Thank you " + name + " for your review!");
-
-        console.log("Name: " + name);
-        console.log("Rating: " + rating);
-        console.log("Review: " + review);
-
-        document.getElementById("reviewForm").reset();
-    }
-}
-
-
-/* 6. DASHBOARD MESSAGE */
-
-function showWelcome() {
-    alert("Welcome to Khabar Ghor Customer Dashboard!");
-}
+});
