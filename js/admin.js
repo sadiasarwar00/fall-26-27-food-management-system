@@ -1,4 +1,21 @@
 // admin.js - CRUD: Menu. Unique features: Approve staff, Block users, Sales summary
+
+// Dashboard: show the real staff numbers from the Staff Overview table
+(function () {
+  if (location.pathname.split('/').pop().toLowerCase() !== 'dashboard.html') return;
+
+  // the Staff Overview table saves its rows under this key (set by tables.js)
+  const key = 'table:' + location.pathname.toLowerCase().replace('dashboard.html', 'staff.html') + ':0';
+  const rows = JSON.parse(localStorage.getItem(key) || 'null');
+  const card = document.querySelector('a.card[href="staff.html"]');
+  if (!rows || !card) return;                     // nothing saved yet: keep the numbers in the HTML
+
+  // column 4 (index 3) is Status
+  const onDuty = rows.filter(r => r[3] && r[3].t.trim().toLowerCase() === 'on duty').length;
+  card.querySelector('.big').textContent = onDuty;
+  card.querySelector('p').textContent = 'Out of ' + rows.length;
+})();
+
 function userTable(box, filter, buttons) {
   const draw = () => {
     const users = DB.get('users', []).filter(filter);
