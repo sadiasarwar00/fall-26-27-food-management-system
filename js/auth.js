@@ -39,12 +39,15 @@
       if (!a || !b) return;
       let user = null;
       if (folder === 'admin') {
-        if (mail === 'admin@khabar.com' && pass.value === 'Admin@123') user = { name: 'Admin', email: mail, role: 'admin' };
+        if (mail === 'sadia@khabar.com' && pass.value === 'sadia@123') user = { name: 'Admin', email: mail, role: 'admin' };
       } else {
         const u = read('users', []).find(x => x.email === mail && x.password === pass.value && x.role === folder);
         if (u) user = { name: u.name, email: u.email, role: u.role };
       }
-      if (!user) { setError(pass, 'Wrong email or password. New here? Sign up first.'); return; }
+      if (!user) { setError(pass, folder === 'admin'
+    ? 'Incorrect admin ID or password.'
+    : 'Wrong email or password. New here? Sign up first.');
+  return; }
       localStorage.setItem('session', JSON.stringify(user));
       location.href = 'dashboard.html';
     };

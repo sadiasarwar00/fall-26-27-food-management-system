@@ -1,44 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Khabar Ghor | Restaurant Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Khabar Ghor: search the menu, order, track your food and manage the restaurant">
+  <title>Home | Khabar Ghor</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div class="layout">
 
-  <main class="home">
-    <h1>Khabar Ghor</h1>
-    <p class="sub">Restaurant management system. Choose who you are to log in.</p>
+  <!-- ============ SIDEBAR MENU (same look as the dashboards) ============ -->
+  <nav class="sidebar">
+    <div class="brand">Khabar Ghor</div>
+    <div class="role">Restaurant system</div>
+    <a href="#top" class="active">Home</a>
+    <a href="#search">Search Menu</a>
+    <a href="#who">Who It's For</a>
+    <a href="#how">How It Works</a>
+    <a href="#hours">Opening Hours</a>
+    <a href="#contact">Contact Us</a>
+    <a href="#who">Login</a>
+    <a href="signup.html">Sign up</a>
+  </nav>
 
-    <div class="grid">
+  <main class="content" id="top">
 
-      <a class="card link" href="customer/login.html">
-        <h3>Customer</h3>
-        <p>See the menu, follow your order, find offers.</p>
-      </a>
-
-      <a class="card link" href="waiter/login.html">
-        <h3>Waiter</h3>
-        <p>Watch your tables and serve ready food.</p>
-      </a>
-       <a class="card link" href="cashier/login.html">
-        <h3>Cashier</h3>
-        <p>Collect bills and check the till.</p>
-      </a>
-
-      <a class="card link" href="admin/login.html">
-        <h3>Admin</h3>
-        <p>Sales, staff and reports for the owner.</p>
-      </a>
-
+    <!-- ============ HERO with the menu search ============ -->
+    <h1>Find your next meal</h1>
+    <p class="sub">Search the whole menu in seconds, order with one account and follow your food until it is served. No account needed to search.</p>
+    <div class="toolbar">
+      <input type="search" id="menuSearch" placeholder="Search by dish or category..." aria-label="Search the menu">
+      <select id="menuCategory" aria-label="Category">
+        <option value="All">All categories</option>
+        <option value="Rice &amp; Curry">Rice &amp; Curry</option>
+        <option value="Starters">Starters</option>
+        <option value="Drinks">Drinks</option>
+        <option value="Desserts">Desserts</option>
+      </select>
     </div>
 
-    <p class="sub" style="margin-top:25px">
-      No account yet? <a href="signup.html">Sign up</a> (customers and staff only).
-    </p>
-  </main>
+    <!-- ============ WHY KHABAR GHOR ============ -->
+    <div class="grid">
+      <div class="card">
+        <div class="big">1</div>
+        <h3>One account</h3>
+        <p>Sign up once and use your own dashboard.</p>
+      </div>
+      <div class="card">
+        <div class="big">&#10003;</div>
+        <h3>Track your order</h3>
+        <p>See every step: received, preparing, ready, served.</p>
+      </div>
+      <div class="card">
+        <div class="big">%</div>
+        <h3>Offers and combos</h3>
+        <p>Claim lunch combos and student discounts.</p>
+      </div>
+      <div class="card">
+        <div class="big">7</div>
+        <h3>Open every day</h3>
+        <p>Lunch and dinner, seven days a week.</p>
+      </div>
+    </div>
 
+    <!-- ============ MENU SEARCH RESULTS ============ -->
+    <section id="search">
+      <h2>Our menu</h2>
+      <p class="sub" id="menuCount">Type in the search box above, or pick a category.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Dish</th><th>Category</th><th>Price</th><th>Prep time</th><th>Status</th></tr>
+          </thead>
+          <tbody id="menuBody">
+            <tr><td>Chicken Burger</td><td>Burger</td><td>৳250</td><td>25 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Cheese Pizza</td><td>Pizza</td><td>৳550</td><td>30 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Fried Checken</td><td>Chicken</td><td>৳300</td><td>30 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Cold Coffee</td><td>Drinks</td><td>৳120</td><td>10 min</td><td><span class="badge bad">Limited</span></td></tr>
+            <tr><td>Samosa (2 pcs)</td><td>Starters</td><td>৳40</td><td>5 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Chicken Fry</td><td>Starters</td><td>৳150</td><td>15 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Beguni (4 pcs)</td><td>Starters</td><td>৳30</td><td>8 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Mango Lassi</td><td>Drinks</td><td>৳90</td><td>5 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Borhani</td><td>Drinks</td><td>৳60</td><td>5 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Masala Tea</td><td>Drinks</td><td>৳30</td><td>5 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Firni</td><td>Desserts</td><td>৳80</td><td>5 min</td><td><span class="badge ok">Available</span></td></tr>
+            <tr><td>Rasmalai</td><td>Desserts</td><td>৳120</td><td>5 min</td><td><span class="badge bad">Sold out</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sub">Want to order? <a href="signup.html">Create a free customer account</a> or
+        <a href="customer/login.html">log in</a>.</p>
+    </section>
+
+    <!-- ============ WHO IT'S FOR ============ -->
+    <section id="who">
+      <h2>Who is Khabar Ghor for?</h2>
+      <p class="sub">Choose your type to sign up or log in.</p>
+      <div class="grid">
+
+        <div class="card">
+          <span class="badge ok">Customer</span>
+          <h3>Customers</h3>
+          <ul>
+            <li>Browse the full menu</li>
+            <li>Track your order step by step</li>
+            <li>Claim offers and combos</li>
+          </ul>
+          <a href="signup.html" class="btn">Sign up</a>
+          <a href="customer/login.html" class="btn">Login</a>
+        </div>
+
+        <div class="card">
+          <span class="badge info">Waiter</span>
+          <h3>Waiters</h3>
+          <ul>
+            <li>Watch the status of your tables</li>
+            <li>See which food is ready to serve</li>
+            <li>Answer customer requests</li>
+          </ul>
+          <a href="signup.html" class="btn">Sign up</a>
+          <a href="waiter/login.html" class="btn">Login</a>
+        </div>
+
+        <div class="card">
+          <span class="badge warn">Cashier</span>
+          <h3>Cashiers</h3>
+          <ul>
+            <li>Collect bills from tables</li>
+            <li>Check cash, bKash, Nagad and card totals</li>
+            <li>Count the till at the end of the day</li>
+          </ul>
+          <a href="signup.html" class="btn">Sign up</a>
+          <a href="cashier/login.html" class="btn">Login</a>
+        </div>
+
+        <div class="card">
+          <span class="badge">Admin</span>
+          <h3>Administrators</h3>
+          <ul>
+            <li>Watch sales and orders</li>
+            <li>See which staff are on duty</li>
+            <li>Read reports on best sellers</li>
+          </ul>
+          <a href="admin/login.html" class="btn">Admin Login</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section id="how">
+      <h2>How it works</h2>
+      <p class="sub">Three simple steps.</p>
+      <ol class="steps">
+        <li>
+          <h3>1. Sign up</h3>
+          <p>Open <a href="signup.html">Sign up</a>, choose Customer, Waiter or Cashier and fill in your details.</p>
+        </li>
+        <li>
+          <h3>2. Log in</h3>
+          <p>Use the login page for your type of user. Admin accounts are made by the owner.</p>
+        </li>
+        <li>
+          <h3>3. Use Khabar Ghor</h3>
+          <p>Order and track food, serve tables or collect bills, depending on your account.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ OPENING HOURS ============ -->
+    <section id="hours">
+      <h2>Opening hours</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Days</th><th>Hours</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Saturday - Thursday</td><td>11:00 AM - 11:00 PM</td></tr>
+            <tr><td>Friday</td><td>12:30 PM - 11:00 PM</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sub">We may close early on public holidays.</p>
+    </section>
+
+    <!-- ============ CONTACT US ============ -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr><th>Restaurant</th><td>Khabar Ghor Restaurant</td></tr>
+            <tr><th>Address</th><td>House 00, Road 00, Your Area, Dhaka, Bangladesh</td></tr>
+            <tr><th>Phone</th><td>+880 1822597855</td></tr>
+            <tr><th>Email</th><td><a href="mailto:sadia@khabarghor.example">sadia@khabarghor.example</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sub">Need help with an order? Ask any waiter at the restaurant.</p>
+    </section>
+
+    <!-- ============ CALL TO ACTION + FOOTER ============ -->
+    <section>
+      <h2>Hungry?</h2>
+      <p class="sub">It takes less than two minutes to create an account.</p>
+      <a href="signup.html" class="btn">Create an account</a>
+      <a href="#who" class="btn">I already have one</a>
+    </section>
+
+    <p class="sub" style="margin-top:2rem">&copy; 2026 Khabar Ghor &middot; Restaurant Management System</p>
+
+  </main>
+</div>
+
+<script src="js/home.js"></script>
 </body>
 </html>
