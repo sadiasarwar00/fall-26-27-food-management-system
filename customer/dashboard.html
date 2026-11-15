@@ -32,18 +32,17 @@
 
             <div class="card">
                 <h2>Total Orders</h2>
-                <p class="big">12</p>
+                <p class="big" id="totalOrders">0</p>
             </div>
 
             <div class="card">
-                <h2>Pending Orders</h2>
-                <p class="big">2</p>
-            </div>
-
-            <div class="card">
-                <h2>Completed Orders</h2>
-                <p class="big">10</p>
-            </div>
+    <h2>Pending Orders</h2>
+    <p class="big" id="pendingOrders">0</p>
+   </div>
+          <div class="card">
+    <h2>Completed Orders</h2>
+    <p class="big" id="completedOrders">0</p>
+</div>
 
             <div class="card">
                 <h2>Available Offers</h2>
@@ -54,35 +53,21 @@
 
         <h2>Recent Orders</h2>
 
-        <table>
-            <tr>
-                <th>Order ID</th>
-                <th>Food Name</th>
-                <th>Price</th>
-                <th>Status</th>
-            </tr>
+        <h2>Recent Orders</h2>
 
-            <tr>
-                <td>101</td>
-                <td>Chicken Burger</td>
-                <td>250 Tk</td>
-                <td><span class="badge ok">Delivered</span></td>
-            </tr>
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>Food Name</th>
+        <th>Price</th>
+        <th>Status</th>
+    </tr>
 
-            <tr>
-                <td>102</td>
-                <td>Pizza</td>
-                <td>550 Tk</td>
-                <td><span class="badge warn">Pending</span></td>
-            </tr>
+    <tbody id="recentOrders"></tbody>
 
-            <tr>
-                <td>103</td>
-                <td>Fried Chicken</td>
-                <td>300 Tk</td>
-                <td><span class="badge info">Processing</span></td>
-            </tr>
-        </table>
+</table>
+
+          
 
     </div>
 </div>

@@ -3,33 +3,41 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* 1. FOOD SEARCH */
+    // LOCAL STORAGE
 
-    const searchForm = document.querySelector(".content form");
-    const searchInput = document.querySelector(
-        '.content input[type="text"]'
-    );
-    const categorySelect = document.querySelector(
-        ".content select"
-    );
-    const foodCards = document.querySelectorAll(".grid .card");
+    function getData(key) {
+        return JSON.parse(localStorage.getItem(key) || "[]");
+    }
 
-    if (searchForm && searchInput && foodCards.length > 0) {
+    function saveData(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    let orders = getData("khabarOrders");
+    let reviews = getData("khabarReviews");
+
+
+    // 1. FOOD SEARCH
+
+    const searchForm = document.getElementById("foodSearchForm");
+    const searchInput = searchForm?.querySelector('input[type="text"]');
+    const categorySelect = searchForm?.querySelector("select");
+    const foodCards = document.querySelectorAll("#foodList .card");
+
+    if (searchForm) {
 
         function searchFood() {
+
             const keyword = searchInput.value.toLowerCase().trim();
-            const category = categorySelect
-                ? categorySelect.value.toLowerCase()
-                : "all categories";
+            const category = categorySelect.value.toLowerCase();
 
             foodCards.forEach(function (card) {
-                const name = card.querySelector("h2")
-                    ? card.querySelector("h2").innerText.toLowerCase()
-                    : "";
 
+                const name = card.querySelector("h2").innerText.toLowerCase();
                 const details = card.innerText.toLowerCase();
 
                 const nameMatch = name.includes(keyword);
+
                 const categoryMatch =
                     category === "all categories" ||
                     details.includes(category);
@@ -39,85 +47,248 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        searchForm.addEventListener("submit", function (event) {
-            event.preventDefault();
+        searchForm.addEventListener("submit", function (e) {
+            e.preventDefault();
             searchFood();
         });
 
-        if (categorySelect) {
-            categorySelect.addEventListener("change", searchFood);
-        }
+        categorySelect.addEventListener("change", searchFood);
     }
 
 
-    /* 2. FOOD ORDER */
+    // 2. FOOD ORDER
 
-    document.querySelectorAll(".grid .card button").forEach(
+    document.querySelectorAll("#foodList .card button").forEach(
         function (button) {
+
             button.addEventListener("click", function () {
+
                 const card = button.closest(".card");
+
                 const foodName = card.querySelector("h2").innerText;
 
-                alert(foodName + " added to your order!");
+                const priceText = card.querySelector("p").innerText;
+                const price = Number(priceText.match(/\d+/)?.[0] || 0);
+
+                const newOrder = {
+                    id: orders.length
+                        ? Math.max(...orders.map(o => o.id)) + 1
+                        : 101,
+
+                    food: foodName,
+                    price: price,
+                    status: "Pending"
+                };
+
+                orders.push(newOrder);
+
+                saveData("khabarOrders", orders);
+
+                alert(
+                    "Order Successful!\nYour Order ID: " + newOrder.id
+                );
+
             });
         }
     );
 
+    // 2.5 OFFERS AND COMBO ORDER
 
-    /* 3. ORDER TRACKING */
+    document.querySelectorAll(
+        "#offerList .card button, #comboList .card button"
+    ).forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const card = button.closest(".card");
+
+            const foodName = card.querySelector("h2").innerText;
+
+            const priceText = card.innerText.match(/Price:\s*(\d+)\s*Tk/i);
+
+            if (!priceText) {
+                alert("Price is not specified for this offer!");
+                return;
+            }
+
+            const newOrder = {
+                id: orders.length
+                    ? Math.max(...orders.map(o => o.id)) + 1
+                    : 101,
+
+                food: foodName,
+                price: Number(priceText[1]),
+                status: "Pending"
+            };
+
+            orders.push(newOrder);
+
+            saveData("khabarOrders", orders);
+
+            alert(
+                "Order Successful!\nYour Order ID: " + newOrder.id
+            );
+
+        });
+
+    });
+
+
+
+    // 3. ORDER TRACKING
 
     const trackButton = document.getElementById("trackButton");
 
     if (trackButton) {
+
         trackButton.addEventListener("click", function () {
+
             const orderID = document.getElementById("orderID").value.trim();
 
-            const orders = {
-                "101": "Your order is on the way!",
-                "102": "Your order is pending!",
-                "103": "Your order is processing!"
-            };
+            const result = document.getElementById("orderResult");
 
-            alert(orders[orderID] || "Order not found!");
+            const order = orders.find(function (item) {
+                return String(item.id) === orderID;
+            });
+
+            if (!order) {
+                result.innerHTML = "<p>Order not found!</p>";
+                return;
+            }
+
+            result.innerHTML = "";
+
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const heading = document.createElement("h2");
+            heading.textContent = "Order #" + order.id;
+
+            const food = document.createElement("p");
+            food.textContent = "Food: " + order.food;
+
+            const price = document.createElement("p");
+            price.textContent = "Price: " + order.price + " Tk";
+
+            const status = document.createElement("p");
+            status.textContent = "Status: " + order.status;
+
+            card.append(heading, food, price, status);
+
+            result.appendChild(card);
+
         });
     }
 
 
-    /* 4. CUSTOMER REVIEW */
+    // 4. CUSTOMER REVIEWS
 
     const reviewForm = document.getElementById("reviewForm");
 
+    function displayReview(review) {
+
+        const reviewList = document.getElementById("reviewList");
+
+        if (!reviewList) return;
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const name = document.createElement("h2");
+        name.textContent = review.name;
+
+        const rating = document.createElement("p");
+        rating.textContent = "Rating: " + review.rating + "/5";
+
+        const message = document.createElement("p");
+        message.textContent = review.text;
+
+        const badge = document.createElement("span");
+        badge.className = "badge ok";
+        badge.textContent = "Customer Review";
+
+        card.append(name, rating, message, badge);
+
+        reviewList.prepend(card);
+    }
+
+
     if (reviewForm) {
-        reviewForm.addEventListener("submit", function (event) {
-            event.preventDefault();
+
+        // Show previously saved reviews
+
+        reviews.forEach(displayReview);
+
+        reviewForm.addEventListener("submit", function (e) {
+
+            e.preventDefault();
 
             const name = document.getElementById("reviewName").value.trim();
-            const rating = document.getElementById("rating").value;
-            const review = document.getElementById("reviewText").value.trim();
 
-            if (!name || !review) {
+            const rating = document.getElementById("rating").value;
+
+            const reviewText = document.getElementById("reviewText").value.trim();
+
+            if (!name || !reviewText) {
                 alert("Please fill all fields!");
                 return;
             }
 
+            const newReview = {
+                name: name,
+                rating: rating,
+                text: reviewText
+            };
+
+            reviews.push(newReview);
+
+            saveData("khabarReviews", reviews);
+
+            displayReview(newReview);
+
             alert("Thank you " + name + " for your review!");
 
-            console.log("Name:", name);
-            console.log("Rating:", rating);
-            console.log("Review:", review);
-
             reviewForm.reset();
+
         });
     }
 
 
-    /* 5. DASHBOARD WELCOME */
+    // 5. DASHBOARD
 
-    const welcomeButton = document.getElementById("welcomeButton");
+    const totalOrders = document.getElementById("totalOrders");
 
-    if (welcomeButton) {
-        welcomeButton.addEventListener("click", function () {
-            alert("Welcome to Khabar Ghor Customer Dashboard!");
+    if (totalOrders) {
+
+        const pending = orders.filter(o => o.status === "Pending").length;
+
+        const completed = orders.filter(o => o.status === "Delivered").length;
+
+        totalOrders.textContent = orders.length;
+
+        document.getElementById("pendingOrders").textContent = pending;
+
+        document.getElementById("completedOrders").textContent = completed;
+
+        const table = document.getElementById("recentOrders");
+
+        table.innerHTML = "";
+
+        orders.forEach(function (order) {
+
+            const row = document.createElement("tr");
+
+            [order.id, order.food, order.price + " Tk", order.status]
+                .forEach(function (value) {
+
+                    const cell = document.createElement("td");
+                    cell.textContent = value;
+                    row.appendChild(cell);
+
+                });
+
+            table.appendChild(row);
+
         });
     }
 
