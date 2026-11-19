@@ -1,4 +1,4 @@
-// auth.js - signup validation, login check, and "you must log in" protection
+// auth.js - signup validation, login check
 (function () {
   const read = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
  const m = location.pathname.match(/\/(admin|customer|coustomer|waiter|cashier)\//i);

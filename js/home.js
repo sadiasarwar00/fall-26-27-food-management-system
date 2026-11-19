@@ -1,11 +1,4 @@
-/* =====================================================================
-   home.js  -  The home page (index.html)
-   ---------------------------------------------------------------------
-   The home page needs the menu search only. The menu is an array of
-   objects; showMenu() reads the search box (menuSearch) and the category
-   list (menuCategory) and fills the table body (menuBody).
-   No login is needed to search.
-   ===================================================================== */
+
 
 // ---------- 1. The menu: an array of objects ----------
 const menu = [
