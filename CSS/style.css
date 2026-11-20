@@ -2,11 +2,12 @@
    Khabar Ghor Food Management System  -  style.css
    ---------------------------------------------------------------------
    ONE external style sheet, linked from the <head> of every page.
-   This file contains only CSS, no HTML tags.
+   Look: warm cream pages, a deep green sidebar, orange highlights,
+   serif headings (like a printed menu) and rounded shapes.
 
    Sections in this file:
      1. Reset and page defaults       6. Tables
-     2. Header and navigation bar     7. Badges and messages
+     2. Sidebar menu                  7. Badges and messages
      3. Layout (content, cards)       8. Bars and order steps
      4. Forms                         9. Home, login and sign up pages
      5. Buttons
@@ -24,207 +25,217 @@
 }
 
 body {
-  font-family: "Segoe UI", Arial, sans-serif;  /* ends with a generic family */
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: #333333;
-  background-color: #F4F2F8;
+  color: #2B2118;
+  background-color: #FBF7F0;
 }
 
+/* Headings use a serif font, like a printed menu */
 h1, h2, h3 {
-  line-height: 1.3;
-  color: #1B1F3B;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.25;
+  color: #1F4D3F;
 }
 
-h1 { font-size: 1.6rem; margin-bottom: 4px; }
-h2 { font-size: 1.25rem; margin: 24px 0 10px; }
-h3 { font-size: 1.05rem; margin-bottom: 6px; }
+h1 { font-size: 2rem;    margin-bottom: 6px; }
+h2 { font-size: 1.4rem;  margin: 28px 0 12px; }
+h3 { font-size: 1.1rem;  margin-bottom: 8px; }
 
 .sub {
-  color: #666666;
-  margin-bottom: 20px;
+  color: #7A6C5D;
+  margin-bottom: 24px;
 }
 
 a {
-  color: #663399;
+  color: #C2410C;
 }
 
 a:hover {
-  color: #8E6CC8;
+  color: #9A3412;
 }
 
 
 /* ---------------------------------------------------------------------
-   2. HEADER AND NAVIGATION BAR
-   The HTML has one <nav class="sidebar"> with the brand, the role and the
-   links. Flexbox turns it into a header row (brand, role, log out) and a
-   navigation row (the links) with the "order" property.
+   2. SIDEBAR MENU
+   A tall green column on the left. It stays in place while the page
+   scrolls (position: sticky + height: 100vh).
    --------------------------------------------------------------------- */
 .layout {
-  display: block;                 /* menu on top, content below */
+  display: flex;                  /* sidebar left, content right */
+  align-items: flex-start;
 }
 
 .sidebar {
-  position: sticky;               /* the bar sticks to the top while scrolling */
+  width: 250px;
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
   top: 0;
-  z-index: 10;                    /* stays above the page content */
+  overflow-y: auto;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 0 16px;
-  /* dark header on top (64px), lighter navigation bar below */
-  background: linear-gradient(to bottom, #1B1F3B 64px, #2B2F55 64px);
-}
-
-/* A line break between the header row and the navigation row */
-.sidebar::before {
-  content: "";
-  order: 3;
-  flex-basis: 100%;
-  height: 0;
+  flex-direction: column;
+  padding: 30px 16px 24px 16px;
+  background-color: #1F4D3F;
 }
 
 .brand {
-  order: 1;
-  display: flex;
-  align-items: center;
-  height: 64px;
-  padding-left: 8px;
-  font-size: 1.4rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.7rem;
   font-weight: bold;
-  letter-spacing: 1px;
+  line-height: 1.2;
   color: white;
+  padding: 0 10px;
 }
 
-/* The user type (Customer Panel, Waiter, ...) shown as a small label */
+/* The user type (Customer Panel, Waiter, ...) is small capital text */
 .role {
-  order: 2;
-  margin-left: auto;              /* pushes the label to the right */
-  background-color: #C9A7F5;
-  color: #1B1F3B;
-  font-size: 0.82rem;
+  padding: 0 10px;
+  margin: 6px 0 26px 0;
+  font-size: 0.78rem;
   font-weight: bold;
-  padding: 2px 12px;
-  border-radius: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #FFB36B;
 }
 
-/* Navigation links */
 .sidebar a {
-  order: 4;
-  display: inline-block;
-  color: #F2F2F2;
-  font-size: 0.95rem;
-  padding: 14px 16px;
+  display: block;                 /* one link per line */
+  color: #DCEBE4;
+  font-size: 0.97rem;
+  padding: 11px 14px;
+  margin-bottom: 4px;
+  border-radius: 10px;
   text-decoration: none;
-  border-bottom: 3px solid transparent;
-  transition: background-color 0.3s;
+  transition: background-color 0.25s;
 }
 
 .sidebar a:hover {
-  background-color: #3D4270;
+  background-color: rgba(255, 255, 255, 0.12);
   color: white;
 }
 
 /* The page you are on */
 .sidebar a.active {
-  border-bottom: 3px solid #C9A7F5;
-  background-color: #3D4270;
+  background-color: #E8590C;
+  color: white;
+  font-weight: 600;
+}
+
+/* Log out sits at the bottom of the sidebar, as an outlined button */
+.sidebar a.logout {
+  margin-top: auto;               /* pushes it to the bottom */
+  text-align: center;
+  border: 1px solid #6FA08E;
   color: white;
 }
 
-/* Log out becomes a white button in the header row */
-.sidebar a.logout {
-  order: 2;
-  margin-left: 12px;
-  padding: 4px 14px;
-  border: none;
-  border-radius: 6px;
-  background-color: white;
-  color: #1B1F3B;
-  font-size: 0.85rem;
-}
-
 .sidebar a.logout:hover {
-  background-color: #EEEAF5;
-  color: #1B1F3B;
+  background-color: white;
+  color: #1F4D3F;
 }
 
-/* Small screens: the bar becomes one colour and wraps */
-@media (max-width: 640px) {
+/* Small screens: the sidebar becomes a bar at the top */
+@media (max-width: 800px) {
+  .layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
   .sidebar {
-    background: #2B2F55;
-    padding-bottom: 6px;
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 14px 16px;
+    gap: 4px;
   }
   .brand {
-    height: 52px;
+    font-size: 1.3rem;
+    padding: 0 10px 0 0;
+  }
+  .role {
+    margin: 0 12px 0 0;
+  }
+  .sidebar a {
+    margin: 0;
+    padding: 7px 12px;
+    font-size: 0.9rem;
+  }
+  .sidebar a.logout {
+    margin-top: 0;
   }
 }
 
 
 /* ---------------------------------------------------------------------
    3. LAYOUT: CONTENT AND CARDS
-   max-width + margin: 0 auto keeps the page centred on any screen
    --------------------------------------------------------------------- */
 .content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px 16px;
-  min-height: 75vh;               /* keeps the footer near the bottom on short pages */
+  flex: 1;                        /* takes all the space next to the sidebar */
+  min-width: 0;                   /* lets wide tables scroll instead of stretching */
+  max-width: 1150px;
+  padding: 40px 44px;
 }
 
-/* A white box with rounded corners and a soft shadow */
+/* A white box with rounded corners and a thin warm border */
 .card {
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 20px;
+  border: 1px solid #EFE3D3;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(80, 50, 20, 0.06);
+  padding: 22px;
 }
 
 .card h2 {
-  margin: 0 0 8px;
-  font-size: 1.1rem;
+  margin: 0 0 10px;
+  font-size: 1.15rem;
 }
 
 .card h3 {
   margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 2px solid #EEEAF5;
+  border-bottom: 1px dashed #E3D5C3;   /* like a menu divider */
 }
 
 .card p {
   margin-bottom: 4px;
 }
 
+.card ul {
+  margin: 10px 0 16px 20px;
+  font-size: 0.93rem;
+}
+
 /* Cards in a responsive grid: they wrap onto new lines on small screens */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 16px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
 }
 
-/* Cards that are links (dashboard tiles) */
+/* Cards that are links (dashboard tiles): lift up when hovered */
 .card.link {
   display: block;
   text-decoration: none;
   color: inherit;
-  border-left: 6px solid #663399;
-  transition: transform 0.3s;
+  border-top: 5px solid #E8590C;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
 .card.link:hover {
-  transform: scale(1.03);
-}
-
-.card ul {
-  margin: 10px 0 14px 20px;
-  font-size: 0.92rem;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(80, 50, 20, 0.14);
 }
 
 .big {
-  font-size: 2rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.2rem;
   font-weight: bold;
-  color: #663399;
+  color: #E8590C;
 }
 
 
@@ -233,20 +244,23 @@ a:hover {
    --------------------------------------------------------------------- */
 label {
   display: block;
-  margin-top: 12px;
+  margin-top: 14px;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: #444444;
+  color: #5B4D3F;
 }
 
 input,
 select,
 textarea {
   width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #C8C3D4;
-  border-radius: 6px;
+  padding: 10px 14px;
+  border: 1px solid #E3D5C3;
+  border-radius: 10px;
   font-family: inherit;
   font-size: 0.95rem;
+  color: #2B2118;
   background-color: white;
 }
 
@@ -254,8 +268,8 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 2px solid #8E6CC8;
-  border-color: #8E6CC8;
+  outline: 3px solid #FFD8B5;
+  border-color: #E8590C;
 }
 
 textarea {
@@ -265,10 +279,11 @@ textarea {
 /* A form on a panel page is a white box */
 .content form {
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 16px;
-  margin-bottom: 20px;
+  border: 1px solid #EFE3D3;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(80, 50, 20, 0.06);
+  padding: 20px;
+  margin-bottom: 24px;
 }
 
 /* A form with no labels (search boxes) puts its fields in one row */
@@ -288,7 +303,7 @@ textarea {
 /* Red error text shown under a field by JavaScript validation */
 .error {
   display: block;
-  color: #C62828;
+  color: #B42318;
   font-size: 0.85rem;
   min-height: 1em;
 }
@@ -298,7 +313,7 @@ textarea {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .toolbar input {
@@ -318,10 +333,10 @@ textarea {
   gap: 8px;
   align-items: center;
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #EFE3D3;
+  border-radius: 16px;
   padding: 14px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .addrow input {
@@ -337,36 +352,42 @@ textarea {
 
 /* ---------------------------------------------------------------------
    5. BUTTONS
-   :hover with a transition
+   Pill shaped (border-radius: 999px), darker on hover
    --------------------------------------------------------------------- */
 button,
 .btn {
   display: inline-block;
-  background-color: #663399;
+  background-color: #E8590C;
   color: white;
   border: none;
-  padding: 9px 20px;
-  border-radius: 6px;
+  padding: 10px 24px;
+  border-radius: 999px;
   font-family: inherit;
   font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.3s;
+  transition: background-color 0.25s, transform 0.15s;
 }
 
 button:hover,
 .btn:hover {
-  background-color: #8E6CC8;
+  background-color: #C2410C;
   color: white;
+}
+
+button:active,
+.btn:active {
+  transform: scale(0.97);
 }
 
 button:focus,
 .btn:focus {
-  outline: 3px solid orange;
+  outline: 3px solid #FFD8B5;
 }
 
 button:disabled {
-  background-color: #BBBBBB;
+  background-color: #CFC6BA;
   cursor: not-allowed;
 }
 
@@ -374,7 +395,7 @@ button:disabled {
 label ~ button,
 .card button,
 .content form button {
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 .content form:not(:has(label)) button,
@@ -384,37 +405,31 @@ td button {
   margin-top: 0;
 }
 
+/* Grey / outlined button for Cancel and similar actions */
 button.secondary {
-  background-color: #6C757D;
+  background-color: white;
+  color: #5B4D3F;
+  border: 1px solid #D9C9B8;
 }
 
 button.secondary:hover {
-  background-color: #868E96;
+  background-color: #F5EDE2;
+  color: #2B2118;
 }
 
 button.del {
-  background-color: #C62828;
+  background-color: #B42318;
 }
 
 button.del:hover {
-  background-color: #E53935;
-}
-
-.btn-light {
-  background-color: white;
-  color: #1B1F3B;
-}
-
-.btn-light:hover {
-  background-color: #EEEAF5;
-  color: #1B1F3B;
+  background-color: #8E1B12;
 }
 
 .btn-small,
 button.small,
 td button {
-  padding: 4px 12px;
-  font-size: 0.85rem;
+  padding: 5px 14px;
+  font-size: 0.82rem;
 }
 
 td button {
@@ -424,89 +439,98 @@ td button {
 
 /* ---------------------------------------------------------------------
    6. TABLES
-   <table>, <thead>, <tbody>, <th>, <td> for tabular data
+   A light header with small capital letters, no heavy colours
    --------------------------------------------------------------------- */
 .table-wrap {
   overflow-x: auto;              /* wide tables scroll inside the page */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.92rem;
+  border-collapse: separate;     /* needed for rounded corners */
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: 0.93rem;
   background-color: white;
+  border: 1px solid #EFE3D3;
+  border-radius: 16px;
 }
 
 th {
-  background-color: #663399;
-  color: white;
+  background-color: #FFF0DF;
+  color: #7C2D12;
   text-align: left;
-  padding: 10px;
+  padding: 12px 14px;
+  font-size: 0.78rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
   white-space: nowrap;
+  border-bottom: 2px solid #F5D9B8;
 }
 
 td {
-  padding: 9px 10px;
-  border-bottom: 1px solid #EEEAF5;
+  padding: 11px 14px;
+  border-bottom: 1px solid #F4EBDD;
+}
+
+tbody tr:last-child td,
+tbody tr:last-child th {
+  border-bottom: none;
 }
 
 /* A table with the title in the first column (Contact Us) */
 tbody th {
-  background-color: #EEEAF5;
-  color: #1B1F3B;
+  background-color: #FFF8EE;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #F4EBDD;
+  width: 30%;
 }
 
-/* Striped rows with a pseudo-class */
-tbody tr:nth-child(even) {
-  background-color: #FAF8FD;
-}
-
-tbody tr:hover {
-  background-color: #F0EAFA;
+tbody tr:hover td {
+  background-color: #FFFAF3;
 }
 
 .empty {
   text-align: center;
-  color: #888888;
-  padding: 20px;
+  color: #9A8B7A;
+  padding: 22px;
 }
 
 
 /* ---------------------------------------------------------------------
    7. BADGES AND MESSAGES
+   Soft coloured labels: tinted background, dark text of the same colour
    --------------------------------------------------------------------- */
 .badge {
   display: inline-block;
-  padding: 2px 10px;
-  border-radius: 12px;
+  padding: 2px 12px;
+  border-radius: 999px;
   font-size: 0.78rem;
-  font-weight: bold;
-  color: white;
-  background-color: #6C757D;
+  font-weight: 700;
+  color: #555555;
+  background-color: #ECE7DF;
   white-space: nowrap;
 }
 
-.badge.ok   { background-color: #2E7D32; }
-.badge.warn { background-color: #EF6C00; }
-.badge.bad  { background-color: #C62828; }
-.badge.info { background-color: #1565C0; }
+.badge.ok   { background-color: #DDF3E2; color: #1B5E20; }
+.badge.warn { background-color: #FFF0BF; color: #8A5A00; }
+.badge.bad  { background-color: #FDE1DD; color: #B42318; }
+.badge.info { background-color: #DCEAFF; color: #1556A8; }
 
 /* Result and message lines written by JavaScript */
 .note {
   margin-top: 14px;
   font-size: 0.9rem;
+  color: #7A6C5D;
 }
 
 p.ok,
 .msg {
-  padding: 10px 14px;
-  border-radius: 6px;
+  padding: 12px 16px;
+  border-radius: 12px;
   margin-top: 14px;
-  border-left: 5px solid #2E7D32;
-  background-color: #E8F5E9;
+  background-color: #DDF3E2;
   color: #1B5E20;
 }
 
@@ -526,14 +550,14 @@ p.ok,
 /* Horizontal bar chart: each bar's width is set with style.width */
 .row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .row div:first-child {
   width: 150px;                   /* the label */
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
 
 .row .bar {
@@ -541,49 +565,51 @@ p.ok,
 }
 
 .bar {
-  background-color: #EEEAF5;
-  border-radius: 6px;
-  height: 22px;
+  background-color: #F4EBDD;
+  border-radius: 999px;
+  height: 14px;
   overflow: hidden;
 }
 
 .bar span {
   display: block;
   height: 100%;
-  background-color: #663399;
-  border-radius: 6px;
+  background-color: #1F4D3F;
+  border-radius: 999px;
   transition: width 0.6s;
 }
 
 .bar.gold span {
-  background-color: #EF6C00;
+  background-color: #E8590C;
 }
 
 /* Order steps (customer Track Order page) */
 .steps {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
 }
 
 .steps li {
-  border: 2px solid #D8D0E8;
-  border-radius: 12px;
+  border: 1px solid #EFE3D3;
+  border-top: 5px solid #E3D5C3;
+  border-radius: 14px;
   background-color: white;
   padding: 16px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: #9A8B7A;
 }
 
 .steps li.done {
-  border-color: #2E7D32;
-  background-color: #F1F8F1;
+  border-top-color: #2E7D32;
+  color: #2B2118;
 }
 
 .steps li.current {
-  border-color: #663399;
-  background-color: #F3ECFC;
+  border-top-color: #E8590C;
+  background-color: #FFF4E8;
+  color: #9A3412;
   font-weight: bold;
 }
 
@@ -592,133 +618,124 @@ p.ok,
    9. HOME, LOGIN AND SIGN UP PAGES
    --------------------------------------------------------------------- */
 
-/* HOME PAGE: the top of <main id="top"> (title, text, search box) becomes
-   a dark hero band. The box-shadow + clip-path trick stretches each
-   element's background across the full width of the screen. */
-#top {
-  padding-top: 0;
-}
-
-#top > h1,
-#top > p:first-of-type,
-#top > .toolbar,
-#top > p:last-of-type {
-  background-color: #1B1F3B;
-  box-shadow: 0 0 0 100vmax #1B1F3B;
-  clip-path: inset(-2px -100vmax);
-  text-align: center;
-  margin: 0;
-}
-
+/* HOME PAGE: the title, text and search box at the top of <main id="top"> */
 #top > h1 {
-  color: white;
-  font-size: 2.6rem;
-  padding-top: 60px;
-  padding-bottom: 10px;
+  font-size: 2.8rem;
+  color: #1F4D3F;
 }
 
-#top > p:first-of-type {
-  color: #D9D4E8;
-  font-size: 1.15rem;
-  padding: 0 20px 24px 20px;
+#top > h1 + p {
+  max-width: 620px;
+  font-size: 1.1rem;
+  color: #7A6C5D;
+  margin-bottom: 22px;
 }
 
+/* A big search box with a soft shadow */
 #top > .toolbar {
-  justify-content: center;
-  padding-bottom: 60px;
-  margin-bottom: 24px;
+  padding: 10px;
+  margin-bottom: 30px;
+  background-color: white;
+  border: 1px solid #EFE3D3;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(80, 50, 20, 0.1);
+}
+
+#top > .toolbar input,
+#top > .toolbar select {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #FBF7F0;
 }
 
 #top > .toolbar input {
-  flex: 0 1 400px;
-  border: none;
-  padding: 13px 16px;
-  font-size: 1rem;
+  flex: 3;
 }
 
 #top > .toolbar select {
-  flex: 0 1 200px;
-  border: none;
-  padding: 13px 16px;
-  font-size: 1rem;
+  flex: 1;
 }
 
-/* Home page sections */
+/* Home page sections: serif heading with an orange bar */
 #top > section {
-  padding: 40px 0 10px 0;
+  padding-top: 36px;
 }
 
 #top > section > h2 {
-  text-align: center;
-  font-size: 1.6rem;
-  margin: 10px 0 6px 0;
+  margin: 0 0 6px 0;
+  padding-left: 14px;
+  border-left: 5px solid #E8590C;
 }
 
 #top > section > .sub {
-  text-align: center;
+  padding-left: 19px;
 }
 
-/* The first row of cards under the hero */
-#top > .grid .card {
-  text-align: center;
-}
-
+/* The first row of cards under the search box */
 #top > .grid .card .big {
   display: inline-block;
-  width: 52px;
-  height: 52px;
-  line-height: 52px;
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  margin-bottom: 6px;
   border-radius: 50%;
-  background-color: #EEE6FA;
-  font-size: 1.4rem;
+  background-color: #FFE8D1;
+  text-align: center;
+  font-size: 1.3rem;
 }
 
-/* "Who is it for" cards: a colour bar on top */
+/* "Who is it for" cards */
 #who .card {
-  border-top: 6px solid #663399;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
 #who .card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(80, 50, 20, 0.14);
 }
 
 #who .card .btn {
   margin: 4px 4px 0 0;
 }
 
-/* Call-to-action band: the last section on the home page */
+/* Call-to-action: the last section on the home page */
 #top > section:last-of-type {
-  background-color: #663399;
-  border-radius: 12px;
+  margin-top: 40px;
+  padding: 36px 28px;
+  border-radius: 20px;
+  background-color: #1F4D3F;
   text-align: center;
-  margin-top: 30px;
-  padding: 30px 20px;
 }
 
-#top > section:last-of-type h2,
-#top > section:last-of-type .sub {
+#top > section:last-of-type h2 {
+  padding-left: 0;
+  border-left: none;
   color: white;
+}
+
+#top > section:last-of-type .sub {
+  padding-left: 0;
+  color: #CFE5DB;
 }
 
 #top > section:last-of-type .btn {
   margin: 6px;
-  background-color: white;
-  color: #663399;
 }
 
-#top > section:last-of-type .btn:hover {
-  background-color: #EEEAF5;
+#top > section:last-of-type .btn + .btn {
+  background-color: transparent;
+  border: 2px solid #6FA08E;
+  padding: 8px 22px;
 }
 
-/* The copyright line at the end of the home page is the footer */
+/* The copyright line at the end of the home page */
 #top > p:last-of-type {
-  color: #BBB6CC;
-  font-size: 0.88rem;
-  padding: 16px;
-  margin-top: 30px;
-  margin-bottom: -24px;           /* touches the bottom of the page */
+  margin: 30px 0 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9A8B7A;
 }
 
 /* LOGIN AND SIGN UP: a centred white box */
@@ -728,20 +745,23 @@ p.ok,
   align-items: center;
   min-height: 100vh;
   padding: 24px 16px;
+  background-color: #FBF7F0;
 }
 
 .auth form {
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 30px;
+  border: 1px solid #EFE3D3;
+  border-top: 6px solid #E8590C;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(80, 50, 20, 0.1);
+  padding: 34px;
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
 }
 
 .auth button {
   width: 100%;
-  margin-top: 20px;
-  padding: 11px;
+  margin-top: 22px;
+  padding: 12px;
   font-size: 1rem;
 }

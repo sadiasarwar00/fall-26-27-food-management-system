@@ -4,7 +4,7 @@ document.querySelectorAll('main table').forEach((table, n) => {
   const key = 'table:' + location.pathname.toLowerCase() + ':' + n;
   const body = table.tBodies[0];
   const heads = [...table.querySelectorAll('thead th')].map(th => th.textContent);
-  // first visit: read the rows from the HTML. Later visits: use the saved rows.
+  // first visit: read the rows from the HTML. Later visits: use the saved rows
   let rows = JSON.parse(localStorage.getItem(key) || 'null') || [...body.rows].map(tr =>
     [...tr.cells].map(td => { const b = td.querySelector('.badge'); return { t: td.textContent.trim(), c: b ? b.className.replace('badge', '').trim() : '' }; }));
   let editing = -1;
