@@ -86,7 +86,6 @@
     return bills;
   }
 
-  // Dashboard
   function dashboard() {
     const totalBills = document.getElementById("totalBills");
 
@@ -111,7 +110,6 @@
     document.getElementById("pendingPayments").textContent = pending;
   }
 
-  // Bills page
   function billsPage() {
     const tableBody = document.getElementById("billTableBody");
 
@@ -205,7 +203,6 @@
     showBills();
   }
 
-  // Payment verification
   function verificationPage() {
     const verifyButton = document.getElementById("verifyBtn");
 
@@ -367,7 +364,6 @@
     showLastRecord();
   }
 
-  // Run the correct function on each page
   getBills();
   dashboard();
   billsPage();
