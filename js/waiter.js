@@ -1,6 +1,7 @@
 // ===== waiter.js : JavaScript for the Waiter pages =====
 // Login, sign up, "must log in" and Log out are handled by auth.js.
 // Used by: dashboard.html, my-tables.html, ready-to-serve.html, customer-requests.html
+// Pages: dashboard, my-tables, ready-to-serve, customer-requests
 
 
 // ---------- 1. Dashboard: name and date ----------
